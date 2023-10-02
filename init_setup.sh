@@ -8,4 +8,3 @@ pip install -r requirements_dev.txt
 echo [$(date)] : "==============>>>>>>>Setup completed <<<<<<=========== !"
 
 # for runing the the script run in terminal "bash init_setup.sh"
- 
