@@ -5,7 +5,7 @@ import logging
 
 logging.basicConfig(level=logging.INFO, format= "[%(asctime)s :%(message)s]")
 
-package_name = "Face_Age_Prediction"
+package_name = "Sensor_Fault_Detection"
 
 list_of_files=[
    ".github/workflows/.gitkeep",
