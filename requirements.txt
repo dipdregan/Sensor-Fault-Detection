@@ -1,4 +1,6 @@
 pymongo[srv]==4.2.0 ##srv for atls online mongo
 ## pymongo==4.2.0## this is for local mongo
 certifi
+pandas
+scikit-learn
 -e .
