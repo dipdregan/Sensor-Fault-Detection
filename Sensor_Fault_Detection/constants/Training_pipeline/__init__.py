@@ -5,7 +5,7 @@ from Sensor_Fault_Detection.constants.s3_bucket import TRAINING_BUCKET_NAME
 Defining common constnat for training pipeline
 """
 TARGET_COLUMN = 'class'
-PIPELINE_NAME: str = "sensor"
+PIPELINE_NAME: str = "Sensor-Fault-Detection"
 ARTIFACT_DIR: str = "artifact"
 FILE_NAME: str = "sensor.csv"
 
@@ -15,7 +15,7 @@ TESTING_FILE_NAME = "test.csv"
 PREPROCESS_OBJECT_FILE_NAME = "preprocessing.pkl"
 MODEL_FILE_NAME = 'model.pkl'
 
-SCHEMA_FILE_PATH = os.path.join("config",'schema.yaml')
+SCHEMA_FILE_PATH = os.path.join("configs",'schema.yaml')
 SCHEMA_DROP_COLS = 'drop_columns'
 
 """
@@ -26,3 +26,21 @@ DATA_INGETION_DIR_NAME: str = "data_ingetion"
 DATA_INGETION_FEATURE_STORE_DIR: str = "feature_store"
 DATA_INGETION_INGESTED_DIR: str = "ingested"
 DATA_INGETION_TRAIN_TEST_SPLIT_RATION: float = 0.25
+
+"""
+Data validation realted constant
+"""
+DATA_VALIDATION_DIR_NAME: str = "data_validation"
+DATA_VALIDATION_VALID_DIR: str = "validated"
+DATA_VALIDATION_INVALID_DIR: str = "invalid"
+DATA_VALIDATION_DRIFT_REPORT_DIR: str = "drift_report"
+DATA_VALIDATION_DRIFT_REPORT_FILE_NAME: str = "report.yaml"
+
+
+"""
+Data Transformation ralated constant
+"""
+
+DATA_TRANSFORMATION_DIR_NAME = 'data_transformation'
+DATA_TRANSFORMATION_TRANSFORMED_DATA_DIR = "transformed"
+DATA_TRANSFORMATION_TRANSFORMED_OBJECT_DIR = "transformed_object"
