@@ -5,8 +5,9 @@ from Sensor_Fault_Detection.entity.config_entity import DataIngetionConfig
 from Sensor_Fault_Detection.entity.aritfacft_entity import DataIngestionArtifact
 
 from sklearn.model_selection import train_test_split
-
 from Sensor_Fault_Detection.data_access.Export_DB_data import ExportData
+from Sensor_Fault_Detection.utils.util import read_yaml_file
+from Sensor_Fault_Detection.constants.Training_pipeline import SCHEMA_FILE_PATH
 
 from pandas import DataFrame
 import pandas as pd
@@ -17,6 +18,7 @@ class DataIngestion:
     def __init__(self, data_ingestion_config:DataIngetionConfig):
         try:
             self.data_ingestion_config = data_ingestion_config
+            self._schema_config = read_yaml_file(SCHEMA_FILE_PATH)
         except Exception as e:
             raise SensorException(e,sys)
 
@@ -70,6 +72,8 @@ class DataIngestion:
     def initiate_data_ingestion(self) -> DataIngestionArtifact:
         try:
             dataframe = self.export_data_into_feature_store()
+            dataframe = dataframe.drop(self._schema_config["drop_columns"],axis=1)
+
             self.split_data_as_train_test(dataframe = dataframe)
             data_ingestion_artifact = DataIngestionArtifact(trained_file_path=self.data_ingestion_config.training_file_path,
                                   test_file_path= self.data_ingestion_config.testing_file_path)
