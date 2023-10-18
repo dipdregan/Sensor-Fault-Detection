@@ -98,6 +98,21 @@ def save_object(file_path: str, obj: object):
         logging.error(f"Error saving object to file {file_path}: {str(e)}")
         raise SensorException(e, sys)
 
+def load_object(file_path: str,)->object:
+
+    try:
+        if not os.path.exists(file_path):
+            raise Exception(f"File path :{file_path} is not exits")
+
+        os.makedirs(os.path.dirname(file_path), exist_ok=True)
+        with open(file_path, "rb") as file_obj:
+            dill.load(file_obj)
+            return dill
+        
+    except Exception as e:
+        raise SensorException(e, sys)
+
+
 def load_numpy_array_data(file_path: str) -> np.array:
     """
     Loads a NumPy array from a binary file at the specified file path.
