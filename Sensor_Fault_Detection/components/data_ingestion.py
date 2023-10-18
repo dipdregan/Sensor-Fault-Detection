@@ -77,6 +77,10 @@ class DataIngestion:
             self.split_data_as_train_test(dataframe = dataframe)
             data_ingestion_artifact = DataIngestionArtifact(trained_file_path=self.data_ingestion_config.training_file_path,
                                   test_file_path= self.data_ingestion_config.testing_file_path)
+            
+            logging.info(f"{30*'===='}")
+            logging.info(f"{10*'=='}Data Ingestion Completed...{10*'=='}")
+            logging.info(f"{30*'===='}")
             return data_ingestion_artifact
         except Exception as e:
             raise SensorException(e,sys)
