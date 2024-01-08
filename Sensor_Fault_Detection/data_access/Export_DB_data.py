@@ -42,7 +42,7 @@ class ExportData:
                 collection = self.mongo_client.client[collection_name]
             else:
                 collection = self.mongo_client.client[database_name][collection_name]
-
+            logging.info(f"Data ingetion started from Mongo DB ...>>>>>>>>>>>>")
             df = pd.DataFrame(list(collection.find()))
             logging.info(f"{df}")
 
@@ -50,6 +50,9 @@ class ExportData:
                 df = df.drop(columns=["_id"], axis=1)
 
             df.replace({"na": np.nan}, inplace=True)
+
+            logging.info(f"Data ingested ... completed...>>>>>>>")
+            logging.info(f"{df}")
 
             return df
 

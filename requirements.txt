@@ -3,4 +3,7 @@ pymongo[srv]==4.2.0 ##srv for atls online mongo
 certifi
 pandas
 scikit-learn
+PyYAML
+dill
+imblearn
 -e .

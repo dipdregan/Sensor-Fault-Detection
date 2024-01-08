@@ -1,6 +1,8 @@
 import os
 from Sensor_Fault_Detection.constants.s3_bucket import TRAINING_BUCKET_NAME
 
+
+SAVE_MODEL_DIR = os.path.join("saved_models")
 """
 Defining common constnat for training pipeline
 """
@@ -52,4 +54,12 @@ MODEL_TRAINER_DIR_NAME:str = "model_trainer"
 MODEL_TRAINER_TRAINED_MODEL_DIR:str = "traned_model"
 MODEL_FILE_NAME:str = "model.pkl"
 MODEL_TRAINER_EXPECTED_SCORE: float =0.71
-MODEL_TRAINER_OVER_FITTING_UNDER_FITTING: float =0.5
+MODEL_TRAINER_OVER_FITTING_UNDER_FITTING: float =0.05
+
+"""
+Model Evaluation Related Constant
+"""
+MODEL_EVALUATION_DIR_NAME: str ='model_evalutaion'
+MODEL_EVALUATION_REPORT_FILE_PATH = 'report.yaml'
+MODEL_EVALUATION_CHANGED_THRESHOLD_SCORE:float = 0.02
+

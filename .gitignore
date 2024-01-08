@@ -3,9 +3,12 @@ __pycache__/
 *.py[cod]
 *$py.class
 *.csv
+*src
+*sensor.csv
 # C extensions
 *.so
 *env
+*artifact
 # Distribution / packaging
 .Python
 build/

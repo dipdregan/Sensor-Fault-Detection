@@ -17,7 +17,7 @@ from Sensor_Fault_Detection.ml.model.estimator import TargetValueMapping
 from Sensor_Fault_Detection.utils.util import save_numpy_data, save_object
 
 class DataTransformation:
-    def __init__(self,data_validation_artifact: DataValidationArtifact, 
+    def __init__(self,data_validation_artifact: DataValidationArtifact,  
                     data_transformation_config: DataTransformationConfig,):
         """
 
