@@ -1,11 +1,14 @@
-from Sensor_Fault_Detection.utils.util import load_numpy_array_data, load_object, save_object
+from Sensor_Fault_Detection.utils.util import load_numpy_array_data, load_object,\
+      save_object
 from Sensor_Fault_Detection.exception import SensorException
 from Sensor_Fault_Detection.logger import logging
 
-from Sensor_Fault_Detection.entity.aritfacft_entity import DataTransformationArtifact, ModelTrainerArtifact
+from Sensor_Fault_Detection.entity.aritfacft_entity import DataTransformationArtifact,\
+      ModelTrainerArtifact
 from Sensor_Fault_Detection.entity.config_entity import ModelTranierConfig
 
-from Sensor_Fault_Detection.ml.metric.classification_matrics import get_classification_score
+from Sensor_Fault_Detection.ml.metric.classification_matrics import \
+    get_classification_score
 from Sensor_Fault_Detection.ml.model.estimator import SensorModel
 
 from xgboost import XGBClassifier
@@ -31,12 +34,15 @@ class ModelTrainer:
         
     def initiate_model_trainer(self)-> ModelTrainerArtifact:
         try:
+            logging.info("<<===================Model Traning Started.......=================>>")
             train_file_path = self.data_transformation_artifact.transformed_train_file_path
             test_file_path = self.data_transformation_artifact.transformed_test_file_path
-
+            
+            logging.info("loading the train and test data set..............")
             train_arr = load_numpy_array_data(train_file_path)
             test_arr = load_numpy_array_data(test_file_path)
 
+            logging.info(f"Spliting the data into features and lables..........")
             x_train, y_train, x_test, y_test = (
                 train_arr[:,:-1],
                 train_arr[:,-1],
@@ -44,6 +50,7 @@ class ModelTrainer:
                 test_arr[:, -1]
             )
 
+            logging.info(f"Start model training............")
             model = self.train_model(x_train=x_train,y_train=y_train)
 
             y_train_pred = model.predict(x_train)
@@ -55,6 +62,7 @@ class ModelTrainer:
             y_test_pred = model.predict(x_test)
             classification_test_matrics = get_classification_score(y_true=y_test,y_pred=y_test_pred)
 
+            logging.info("Checking the Overfittiong or Under Fitting...............")
             ## Let's Check the Overfittiong or Under Fitting
             diff = classification_train_matrics.f1_score - classification_test_matrics.f1_score
 

@@ -60,13 +60,17 @@ class DataTransformation:
     
     def initiate_data_transformation(self,) -> DataTransformationArtifact:
         try:
+            logging.info(f"<<<===================== Data Transformation Strated ==========================>>>>>")
             
+            logging.info(f"Loading the train and test data set ........... ")
             train_df = DataTransformation.read_data(self.data_validation_artifact.valid_train_file_path)
             test_df = DataTransformation.read_data(self.data_validation_artifact.valid_test_file_path)
+            
             preprocessor = self.get_data_transformer_object()
 
 
             #training dataframe
+            logging.info(f"Start Splitting The data into Target and Features===========")
             input_feature_train_df = train_df.drop(columns=[TARGET_COLUMN], axis=1)
             target_feature_train_df = train_df[TARGET_COLUMN]
             target_feature_train_df = target_feature_train_df.replace( TargetValueMapping().to_dict())
@@ -76,10 +80,12 @@ class DataTransformation:
             target_feature_test_df = test_df[TARGET_COLUMN]
             target_feature_test_df = target_feature_test_df.replace(TargetValueMapping().to_dict())
 
+            logging.info(f"Start preprocessor to preprocess the train features and test feature data ....")
             preprocessor_object = preprocessor.fit(input_feature_train_df)
             transformed_input_train_feature = preprocessor_object.transform(input_feature_train_df)
             transformed_input_test_feature =preprocessor_object.transform(input_feature_test_df)
 
+            logging.info("Strat labaling the train and test for features and label using SMOTETomek...")
             smt = SMOTETomek(sampling_strategy="minority")
 
             input_feature_train_final, target_feature_train_final = smt.fit_resample(
@@ -100,6 +106,7 @@ class DataTransformation:
             
             
             #preparing artifact
+            logging.info("Retruning the data transformation Artifact.......")
             data_transformation_artifact = DataTransformationArtifact(
                 transformed_object_file_path=self.data_transformation_config.transformed_object_file_path,
                 transformed_train_file_path=self.data_transformation_config.transformed_train_file_path,

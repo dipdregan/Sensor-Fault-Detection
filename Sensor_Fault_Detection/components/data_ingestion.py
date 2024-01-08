@@ -72,7 +72,9 @@ class DataIngestion:
     def initiate_data_ingestion(self) -> DataIngestionArtifact:
         try:
             dataframe = self.export_data_into_feature_store()
-            dataframe = dataframe.drop(self._schema_config["drop_columns"],axis=1)
+            drop_columns = self._schema_config["drop_columns"]
+            dataframe = dataframe.drop(drop_columns,axis=1)
+            logging.info(f"Drop columns: {drop_columns}")
 
             self.split_data_as_train_test(dataframe = dataframe)
             data_ingestion_artifact = DataIngestionArtifact(trained_file_path=self.data_ingestion_config.training_file_path,

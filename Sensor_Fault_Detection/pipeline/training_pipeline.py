@@ -21,7 +21,9 @@ class TrainingPipeline:
             data_ingetion = DataIngestion(data_ingestion_config=self.data_ingestion_config)
 
             data_ingetion_artifact = data_ingetion.initiate_data_ingestion()
-            logging.info(f"<<<<<<<<<<<<<<<<---------Data Ingestion Completed  and artifact : {data_ingetion_artifact}---------->>>>>>>>>>>>")
+            logging.info(f"<<<<<<<<<<<<<<<<---------Data Ingestion Completed ---------->>>>>>>>>>>>")
+            logging.info("artifact DIR: {data_ingetion_artifact}")
+
             return data_ingetion_artifact
         except Exception as e:
             raise SensorException(e, sys)
